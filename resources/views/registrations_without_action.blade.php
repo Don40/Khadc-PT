@@ -75,10 +75,23 @@
         </table>
     </div>
 
-    <!-- Pagination -->
-    {{ $registrations->withQueryString()->links() }}
-
-</div>
+            <!-- Pagination -->
+            {{ $registrations->withQueryString()->links() }}
+                <div class="d-flex justify-content-between align-items-center my-3">
+                <div>
+                Showing <strong>{{ $registrations->firstItem() }}</strong>
+                to <strong>{{ $registrations->lastItem() }}</strong>
+                of <strong>{{ $registrations->total() }}</strong> results
+                </div>
+                <div>
+            </div>
+        </div>
+         <div class="d-flex justify-content-start mt-4">
+            <a href="{{ url('/') }}" class="btn btn-dark ">
+                ← Back to Home
+            </a>
+        </div>
+    </div>
 
 <!-- JS and Modal -->
 <script>
