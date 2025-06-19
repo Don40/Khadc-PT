@@ -26,17 +26,20 @@
     </div>
 
     <!-- Monthly Salary Input -->
-  <div class="form-group">
-    <label for="monthly_salary">Monthly Salary</label>
-    <input
-        type="number"
-        name="monthly_salary"
-        id="monthly_salary"
-        class="form-control"
-        step="0.01"
+   <div class="mb-3">
+    <label for="monthly_salary" class="form-label fw-semibold">Monthly Salary</label>
+    <input 
+        type="number" 
+        name="monthly_salary" 
+        id="monthly_salary" 
+        class="form-control form-control-lg" 
+        {{-- step="50000"  --}}
+        placeholder="Enter monthly salary" 
         required
+        style="height: 30px; font-size: 1.2rem;"
     >
 </div>
+
 
 
     <!-- 10% Calculation Display (Read-only) -->
