@@ -38,6 +38,8 @@
                     <th>Mobile</th>
                     <th>File</th>
                     <th>Registered At</th>
+                    <th>Monthly Salary</th>
+                    <th>10% Value</th>  
                 </tr>
             </thead>
             <tbody>
@@ -65,6 +67,8 @@
                             @endif
                         </td>
                         <td>{{ $reg->created_at->format('d M Y, h:i A') }}</td>
+                        <td>{{ number_format($reg->monthly_salary, 2) }}</td>
+                        <td>{{ number_format($reg->ten_percent, 2) }}</td>
                     </tr>
                 @empty
                     <tr>

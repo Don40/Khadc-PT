@@ -39,6 +39,8 @@
                 <th>Mobile</th>
                 <th>File</th>
                 <th>Registered At</th>
+                <th>Monthly Salary</th>
+                 <th>10% Value</th> 
                 <th>Action</th>
             </tr>
         </thead>
@@ -72,8 +74,10 @@
 
 
                     <td>{{ $reg->created_at->format('d M Y, h:i A') }}</td>
-                    <td>
-                        <form action="{{ route('registrations.delete', $reg->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                    <td>{{ number_format($reg->monthly_salary, 2) }}</td>
+                   <td>{{ number_format($reg->ten_percent, 2) }}</td>  
+                   <td>
+                   <form action="{{ route('registrations.delete', $reg->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">Delete</button>

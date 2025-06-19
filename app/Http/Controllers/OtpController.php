@@ -17,9 +17,10 @@ class OtpController extends Controller
         'mobile' => 'required|regex:/^[0-9]{10}$/',
         'email' => 'required|email',
         'file' => 'required|file|max:2048',
+         'monthly_salary' => 'required|numeric',
     ]);
 
-    $formData = $request->only(['name', 'mobile', 'email']);
+    $formData = $request->only(['name', 'mobile', 'email','monthly_salary']);
     $filePath = $request->file('file')->store('uploads', 'public');
 
     Session::put('registration_data', $formData);
@@ -66,11 +67,17 @@ class OtpController extends Controller
             $data = Session::get('registration_data');
             $filePath = Session::get('file_path');
 
+            // ✅ Define monthly_salary and ten_percent
+            $monthlySalary = $data['monthly_salary'];
+            $tenPercent = $monthlySalary * 0.10;
+
             Registration::create([
                 'name' => $data['name'],
                 'mobile' => $data['mobile'],
                 'email' => $data['email'],
                 'file_path' => $filePath,
+                 'monthly_salary' => $monthlySalary,
+                 'ten_percent' => $tenPercent, 
             ]);
 
             Session::forget(['session_id', 'registration_data', 'file_path']);

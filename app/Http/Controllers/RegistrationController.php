@@ -16,39 +16,32 @@ class RegistrationController extends Controller
         return view('register');
     }
 
-    public function submitForm(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'max:255'],
-            'mobile' => ['required', 'regex:/^[0-9]{10,15}$/'],
-            'file' => ['required', 'file', 'max:2048'], // max size = 2MB
-            // 'email' => ['required', 'email', 'max:255'], // Uncomment if using email
-        ], [
-            'name.required' => 'Name is required.',
-            'name.regex' => 'Name should contain only letters and spaces.',
-            'mobile.required' => 'Mobile number is required.',
-            'mobile.regex' => 'Enter a valid mobile number (10 to 15 digits).',
-            'file.required' => 'Please upload a file.',
-            'file.file' => 'Uploaded file must be valid.',
-            'file.max' => 'File size must not exceed 2MB.',
-            // 'email.required' => 'Email is required.',
-            // 'email.email' => 'Enter a valid email address.',
-        ]);
-    
-        if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('uploads', 'public');
-    
-            Registration::create([
-                'name' => $validated['name'],
-                'mobile' => $validated['mobile'],
-                'email' => $validated['email'],
-                'file_path' => $path,
-                'otp' => $otp,
-            ]);
-    
-           
+   public function submitForm(Request $request)
+{
+    $validated = $request->validate([
+        'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'max:255'],
+        'mobile' => ['required', 'regex:/^[0-9]{10,15}$/'],
+        'email' => ['required', 'email', 'max:255'],
+        'file' => ['required', 'file', 'max:2048'],
+        'monthly_salary' => ['required', 'numeric'],
+    ]);
 
-        }
+    if ($request->hasFile('file')) {
+        $path = $request->file('file')->store('uploads', 'public');
+
+        $tenPercent = $validated['monthly_salary'] * 0.10;
+
+        Registration::create([
+            'name' => $validated['name'],
+            'mobile' => $validated['mobile'],
+            'email' => $validated['email'],
+            'file_path' => $path,
+            'monthly_salary' => $validated['monthly_salary'],
+            'ten_percent' => $tenPercent,
+        ]);
+
+        return redirect()->route('register.success')->with('success', 'Saved');
+    }
     
         return back()->withErrors(['file' => 'File upload failed']);
     }

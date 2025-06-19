@@ -9,7 +9,11 @@ class Registration extends Model
 {
     use HasFactory;
 
-    protected $table = 'registration'; // 👈 Add this line
+    protected $table = 'registrations'; // 👈 Add this line
 
-    protected $fillable = ['name', 'mobile', 'file_path', 'otp'];
+    protected $fillable = [
+    'name', 'mobile', 'email', 'file_path',
+    'monthly_salary', 'ten_percent'
+];
+
 }

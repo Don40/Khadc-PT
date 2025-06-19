@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('mobile');
+            $table->string('email');
             $table->string('file_path');
             $table->timestamps();
+            $table->decimal('monthly_salary', 10, 2)->nullable();
+            $table->decimal('ten_percent', 10, 2)->nullable();
+
         });
     }
     
