@@ -1,7 +1,9 @@
 @extends('layout')
 
 @section('content')
-<form method="POST" enctype="multipart/form-data" action="{{ route('otp.send') }}">
+{{-- <form method="POST" enctype="multipart/form-data" action="{{ route('otp.send') }}"> --}}
+    <form method="POST" enctype="multipart/form-data" action="{{ route('register.submit') }}">
+
     @csrf
     <h3>KHADC Professional Tax Registration Form</h3>
 
@@ -47,7 +49,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Send OTP">
+        <input type="submit" value="Register"> <!-- Changed from "Send OTP" -->
     </div>
 
     <div class="message">

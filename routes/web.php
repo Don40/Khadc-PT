@@ -11,9 +11,9 @@ Route::delete('/registrations/{id}', [RegistrationController::class, 'delete'])-
 Route::get('/registrations/view-only', [RegistrationController::class, 'viewOnly'])->name('registrations.viewonly');
 
 // OTP Routes
-Route::post('/send-otp', [OtpController::class, 'sendOtp'])->name('otp.send'); // ✅ POST only
-Route::get('/verify-otp', [OtpController::class, 'showVerifyForm'])->name('otp.verify.form');
-Route::post('/verify-otp', [OtpController::class, 'verifyOtp'])->name('otp.verify');
+// Route::post('/send-otp', [OtpController::class, 'sendOtp'])->name('otp.send'); // ✅ POST only
+// Route::get('/verify-otp', [OtpController::class, 'showVerifyForm'])->name('otp.verify.form');
+// Route::post('/verify-otp', [OtpController::class, 'verifyOtp'])->name('otp.verify');
 
 Route::get('/register-success', function () {
     return view('register-success');
