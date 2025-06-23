@@ -38,6 +38,7 @@ class RegistrationController extends Controller
             'file_path' => $path,
             'monthly_salary' => $validated['monthly_salary'],
             'ten_percent' => $tenPercent,
+            'user_id' => auth()->id(), // Assuming user is authenticated
         ]);
 
         return redirect()->route('register.success')->with('success', 'Saved');
@@ -73,23 +74,37 @@ class RegistrationController extends Controller
 
             $record->delete();
 
-            return redirect()->route('registrations.all')->with('success', 'Registration deleted successfully.');
+            return redirect()->route('registrations.viewown')->with('success', 'Registration deleted successfully.');
         }
            
-        public function viewOnly(Request $request)
+        // public function viewOnly(Request $request)
+        // {
+        //     $search = $request->input('search');
+        
+        //     $registrations = Registration::when($search, function ($query, $search) {
+        //             return $query->where('name', 'like', "%$search%")
+        //                          ->orWhere('mobile', 'like', "%$search%");
+        //         })
+        //         ->orderByDesc('created_at')
+        //         ->paginate(10);
+        
+        //     return view('registrations_without_action', compact('registrations', 'search'));
+        // }
+
+                      
+        public function viewOwn(Request $request)
         {
             $search = $request->input('search');
-        
-            $registrations = Registration::when($search, function ($query, $search) {
-                    return $query->where('name', 'like', "%$search%")
-                                 ->orWhere('mobile', 'like', "%$search%");
+            $userId = auth()->id();
+
+            $registrations = Registration::where('user_id', $userId)
+                ->when($search, function ($query, $search) {
+                    $query->where('name', 'like', "%$search%")
+                        ->orWhere('mobile', 'like', "%$search%");
                 })
                 ->orderByDesc('created_at')
                 ->paginate(10);
-        
-            return view('registrations_without_action', compact('registrations', 'search'));
+
+            return view('registrations-viewown', compact('registrations', 'search'));
+            }
         }
-
-
-
-}

@@ -11,25 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registrations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('mobile');
-            $table->string('email');
-            $table->string('file_path');
-            $table->timestamps();
-            $table->decimal('monthly_salary', 10, 2)->nullable();
-            $table->decimal('ten_percent', 10, 2)->nullable();
+        Schema::table('registrations', function (Blueprint $table) {
+            
             $table->foreignId('user_id')->constrained();
 
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::table('registrations', function (Blueprint $table) {
         Schema::dropIfExists('registrations');
+        });
     }
 };

@@ -17,7 +17,7 @@
     <h2 class="mb-4">Registered Professional Tax Payers</h2>
 
     <!-- Search Form -->
-    <form method="GET" action="{{ route('registrations.viewonly') }}" class="row mb-3">
+    <form method="GET" action="{{ route('registrations.viewown') }}" class="row mb-3">
         <div class="col-md-4 col-sm-12 mb-2">
             <input type="text" name="search" class="form-control" placeholder="Search by name or mobile" value="{{ $search }}">
         </div>
@@ -25,7 +25,7 @@
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
         <div class="col-md-2 col-sm-12 mb-2">
-            <a href="{{ route('registrations.viewonly') }}" class="btn btn-secondary w-100">Reset</a>
+            <a href="{{ route('registrations.viewown') }}" class="btn btn-secondary w-100">Reset</a>
         </div>
     </form>
    
@@ -39,13 +39,14 @@
                     <th>File</th>
                     <th>Registered At</th>
                     <th>Monthly Salary</th>
-                    <th>10% Value</th>  
+                    <th>10% Value</th> 
+                    <th>Action</th> 
                 </tr>
             </thead>
             <tbody>
                 @forelse ($registrations as $reg)
                     <tr>
-                        <td>{{ $reg->id }}</td>
+                        <td>{{ $reg->user_id }}</td>
                         <td>{{ $reg->name }}</td>
                         <td>{{ $reg->mobile }}</td>
                         <td>
@@ -69,6 +70,13 @@
                         <td>{{ $reg->created_at->format('d M Y, h:i A') }}</td>
                         <td>{{ number_format($reg->monthly_salary, 2) }}</td>
                         <td>{{ number_format($reg->ten_percent, 2) }}</td>
+                      <td>
+                   <form action="{{ route('registrations.delete', $reg->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
                     </tr>
                 @empty
                     <tr>

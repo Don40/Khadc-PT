@@ -10,15 +10,16 @@
 <body class="bg-light">
 
 <div class="container py-4">
-    <!-- Logo Image -->
+    {{-- <!-- Logo Image -->
    <div style="text-align: center; margin-bottom: 20px;">
     <img src="{{ asset('images/khadc.jpg') }}" alt="Logo" style="max-width: 100%;">
-   </div>
-   
-    <h2 class="mb-4">Registered Professional Tax Payers</h2>
+   </div> --}}
+   <h2 class="mb-4">Ohoy There...</h2>
+
+    {{-- <h2 class="mb-4">Registered Professional Tax Payers</h2>
 
     <!-- Search Form -->
-    <form method="GET" action="{{ route('registrations.all') }}" class="row mb-3">
+    <form method="GET" action="{{ route('registrations.viewown') }}" class="row mb-3">
         <div class="col-md-4 col-sm-12 mb-2">
             <input type="text" name="search" class="form-control" placeholder="Search by name or mobile" value="{{ $search }}">
         </div>
@@ -26,7 +27,7 @@
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
         <div class="col-md-2 col-sm-12 mb-2">
-            <a href="{{ route('registrations.all') }}" class="btn btn-secondary w-100">Reset</a>
+            <a href="{{ route('registrations.viewown') }}" class="btn btn-secondary w-100">Reset</a>
         </div>
     </form>
    
@@ -69,10 +70,7 @@
     @else
         N/A
     @endif
-</td>
-
-
-
+                </td>
                     <td>{{ $reg->created_at->format('d M Y, h:i A') }}</td>
                     <td>{{ number_format($reg->monthly_salary, 2) }}</td>
                    <td>{{ number_format($reg->ten_percent, 2) }}</td>  
@@ -130,7 +128,7 @@
         <img id="modalImage" src="" alt="Preview" style="width: 100%; height: auto;">
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>
 
 </html>
