@@ -162,37 +162,42 @@
         <img src="{{ asset('images/khadc.jpg') }}" alt="Logo" style="max-width: 100%;">
     </div>
 
- <!-- Registration for Guest -->
-<div class="auth-box">
-    <h3 class="login-title">Register as Employer or Enterprise</h3>
+   @if($show === 'register')
+    <!-- Registration for Guest -->
+    <div class="auth-box">
+        <h3 class="login-title">Register as Employee/Enterprise</h3>
 
-    <form action="/register" method="POST">
-        @csrf
+        <form action="/register" method="POST">
+            @csrf
+            <input name="name" type="text" placeholder="Name">
+            <input name="email" type="text" placeholder="Email">
+            <input name="password" type="password" placeholder="Password">
+            <button>Register</button>
+        </form>
 
-        <input name="name" type="text" placeholder="Name" value="{{ old('name') }}">
-        @error('name')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <input name="email" type="text" placeholder="Email" value="{{ old('email') }}">
-        @error('email')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <input name="password" type="password" placeholder="Password">
-        @error('password')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <button>Register</button>
-    </form>
-
-    <div class="small-link">
-        Already registered? <a href="/login">Login</a>
+        <div class="small-link">
+            Already registered? <a href="/login">Login</a>
+        </div>
     </div>
-</div>
+@endif
 
+@if($show === 'login')
+    <!-- Login for Guest -->
+    <div class="auth-box">
+        <h3 class="login-title">Login as Employer or Enterprise</h3>
 
+        <form action="/login" method="POST">
+            @csrf
+            <input name="loginname" type="text" placeholder="Name">
+            <input name="loginpassword" type="password" placeholder="Password">
+            <button>Log in</button>
+        </form>
+
+        <div class="small-link">
+            New here? <a href="/register">Register</a>
+        </div>
+    </div>
+@endif
  
     </div>
     @endauth

@@ -5,6 +5,19 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistrationController;
 
 
+
+Route::get('/register', function() {
+    return view('home')->with(['show' => 'register']);
+});
+Route::get('/login', function() {
+    return view('login')->with(['show' => 'login']);
+});
+
+
+
+
+
+
 Route::get('/', function () {
     $registrations = [];
     if (auth()->check()) {
@@ -45,3 +58,7 @@ Route::delete('/registrations/{id}', [RegistrationController::class, 'delete'])
 Route::get('/register-success', function () {
     return view('register-success');
 })->name('register.success');
+
+
+
+
